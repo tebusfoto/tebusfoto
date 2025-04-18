@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TebusFoto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #2f2f2f; /* abu-abu seperti aspal */
+    }
+  </style>
+</head>
+<body class="text-white">
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-4">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">TebusFoto</h1>
+    <p class="text-xl md:text-2xl text-gray-300 mb-6">"Mudah Jual, Mudah Beli, Hasil Foto Maksimal"</p>
+    <a href="#form" class="bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-gray-200 transition">Gabung Tungguannya</a>
+  </section>
+
+  <!-- About Section -->
+  <section class="px-6 py-12 md:py-20 bg-gray-800">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-4">Kenapa TebusFoto?</h2>
+      <p class="text-gray-300 text-lg">TebusFoto hadir untuk mempermudah fotografer freelance menjual hasil karya mereka, dan memudahkan pembeli menemukan konten visual berkualitas lokal.</p>
+    </div>
+  </section>
+
+  <!-- Mockup Section -->
+  <section class="px-6 py-12 md:py-20">
+    <div class="max-w-5xl mx-auto text-center">
+      <h3 class="text-2xl font-semibold mb-6">Contoh Tampilan Platform</h3>
+      <div class="bg-gray-600 rounded-xl h-64 md:h-96 flex items-center justify-center text-gray-300">
+        [Mockup Placeholder]
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Form Section -->
+  <section id="form" class="px-6 py-12 md:py-20 bg-gray-800">
+    <div class="max-w-md mx-auto text-center">
+      <h4 class="text-2xl font-semibold mb-4">Dapatkan info lebih dulu</h4>
+      <form name="early-access" method="POST" data-netlify="true" class="space-y-4">
+        <input type="text" name="name" placeholder="Nama" class="w-full px-4 py-2 rounded bg-gray-200 text-black" required>
+        <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 rounded bg-gray-200 text-black" required>
+        <button type="submit" class="w-full bg-white text-black font-semibold py-2 rounded hover:bg-gray-300 transition">Kirim</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-400">
+    &copy; 2025 TebusFoto. All rights reserved.
+  </footer>
+</body>
+</html>
