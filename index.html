@@ -1,103 +1,48 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TebusFoto - Mudah Jual, Mudah Beli, Citra Maksimal</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TebusFoto</title>
+  <link rel="icon" type="image/png" href="tebusfoto-favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-color: #2f2f2f;
+      margin: 0;
+      background: url('Background-Jalanan.gif') center/cover no-repeat fixed;
     }
   </style>
 </head>
 <body class="text-white font-sans">
+
   <!-- Navbar -->
-  <nav class="bg-gray-900 fixed top-0 w-full z-50 shadow-md">
+  <nav class="bg-black/70 backdrop-blur fixed top-0 w-full z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center space-x-2">
-        <img src="logo-tebusfoto.png" alt="TebusFoto Logo" class="h-8 md:h-10">
-        <span class="text-xl font-bold">TebusFoto</span>
+        <img src="tebusfoto-transparent.png" alt="TebusFoto Logo" class="h-14 md:h-20">
       </div>
-      <div class="space-x-6 text-sm">
-        <a href="#" class="hover:text-gray-300">Jual Foto</a>
-        <a href="#" class="hover:text-gray-300">Beli Foto</a>
-        <a href="#" class="hover:text-gray-300">Tentang Kami</a>
-        <a href="#" class="bg-white text-black px-4 py-1 rounded hover:bg-gray-200">Masuk / Daftar</a>
+      <div class="space-x-4 text-sm md:text-base">
+        <a href="agenda.html" class="hover:underline">Agenda</a>
+        <a href="#" class="hover:underline">Berita</a>
+        <a href="#" class="hover:underline">Jual Foto</a>
+        <a href="#" class="hover:underline">Beli Foto</a>
+        <a href="#" class="hover:underline">Tentang Kami</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4">Mudah Jual, Mudah Beli, Citra Maksimal</h2>
-    <p class="text-lg text-gray-300 mb-6 max-w-xl">Marketplace foto lokal buat fotografer dan pembeli kreatif. Jual dan beli foto dengan cara yang simpel dan transparan.</p>
-    <div class="space-x-4">
-      <a href="#" class="bg-white text-black font-semibold px-6 py-2 rounded-full hover:bg-gray-200 transition">Gabung Sekarang</a>
-      <a href="#galeri" class="border border-white px-6 py-2 rounded-full hover:bg-gray-800 transition">Lihat Galeri</a>
-    </div>
-  </section>
-
-  <!-- Fitur Utama -->
-  <section class="py-20 bg-gray-800 text-center px-4">
-    <h3 class="text-2xl font-semibold mb-12">Kenapa TebusFoto?</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      <div>
-        <h4 class="text-xl font-bold mb-2">📤 Upload Mudah</h4>
-        <p class="text-gray-300">Jual foto langsung dari browser tanpa ribet.</p>
-      </div>
-      <div>
-        <h4 class="text-xl font-bold mb-2">💰 Komisi Fair</h4>
-        <p class="text-gray-300">TebusFoto kasih komisi terbaik untuk fotografer lokal.</p>
-      </div>
-      <div>
-        <h4 class="text-xl font-bold mb-2">🔒 Aman & Terpercaya</h4>
-        <p class="text-gray-300">Pembayaran aman dan hasil foto dibayar cepat.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Galeri Preview -->
-  <section id="galeri" class="py-20 px-4">
-    <h3 class="text-2xl font-semibold text-center mb-8">Galeri Foto</h3>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-      <div class="bg-gray-600 h-40 rounded"></div>
-      <div class="bg-gray-600 h-40 rounded"></div>
-      <div class="bg-gray-600 h-40 rounded"></div>
-      <div class="bg-gray-600 h-40 rounded"></div>
-    </div>
-    <div class="text-center mt-8">
-      <a href="#" class="text-white underline hover:text-gray-300">Lihat Semua</a>
-    </div>
-  </section>
-
-  <!-- Cara Kerja -->
-  <section class="bg-gray-800 py-20 px-4">
-    <h3 class="text-2xl font-semibold text-center mb-12">Cara Kerja</h3>
-    <div class="max-w-4xl mx-auto grid gap-8 md:grid-cols-4 text-center">
-      <div><div class="text-3xl font-bold mb-2">1️⃣</div>Daftar sebagai fotografer</div>
-      <div><div class="text-3xl font-bold mb-2">2️⃣</div>Upload karya terbaik lo</div>
-      <div><div class="text-3xl font-bold mb-2">3️⃣</div>Tunggu pembeli datang</div>
-      <div><div class="text-3xl font-bold mb-2">4️⃣</div>Duit langsung masuk!</div>
-    </div>
-  </section>
-
-  <!-- CTA Ulang -->
-  <section class="py-20 text-center px-4">
-    <h3 class="text-2xl font-semibold mb-4">Siap mulai jualan foto pertama lo?</h3>
-    <a href="#" class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200">Daftar Jadi Fotografer</a>
+  <!-- Hero Text -->
+  <section class="min-h-screen flex justify-center items-center text-center px-4 pt-24">
+    <h1 class="text-3xl md:text-5xl font-bold bg-black/60 px-6 py-4 rounded-lg shadow-lg">
+      Foto Anda, Punya Anda, Hanya Anda!
+    </h1>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 text-sm text-center py-6">
-    <div class="space-x-4 mb-2">
-      <a href="#" class="hover:underline">Tentang</a>
-      <a href="#" class="hover:underline">FAQ</a>
-      <a href="#" class="hover:underline">Kontak</a>
-      <a href="#" class="hover:underline">Instagram</a>
-    </div>
-    <div>© 2025 TebusFoto</div>
+  <footer class="bg-black/70 text-gray-300 text-center text-sm py-4">
+    <a href="https://instagram.com/tebusfoto_official" target="_blank" class="hover:underline">Instagram</a>
   </footer>
+
 </body>
 </html>
