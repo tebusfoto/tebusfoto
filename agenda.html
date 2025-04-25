@@ -43,9 +43,9 @@
         <thead class="bg-gray-800 text-white">
           <tr>
             <th class="py-3 px-4 text-left">Tanggal</th>
-            <th class="py-3 px-4 text-left">Lokasi/Event</th>
+            <th class="py-3 px-4 text-left">Event</th>
             <th class="py-3 px-4 text-left">Jarak</th>
-            <th class="py-3 px-4 text-left">Keterangan</th>
+            <th class="py-3 px-4 text-left">Lokasi</th>
           </tr>
         </thead>
         <tbody id="agenda-body" class="divide-y divide-gray-200">
@@ -78,13 +78,13 @@
         const tbody = document.getElementById('agenda-body');
 
         results.data.forEach(row => {
-          if (row.Tanggal && row["Lokasi/Event"] && row.Jarak) {
+          if (row.Tanggal && row.Event && row.Jarak) {
             const tr = document.createElement('tr');
             tr.innerHTML = `
               <td class="py-3 px-4">${row.Tanggal}</td>
-              <td class="py-3 px-4">${row["Lokasi/Event"]}</td>
+              <td class="py-3 px-4">${row.Event}</td>
               <td class="py-3 px-4">${row.Jarak}</td>
-              <td class="py-3 px-4">${row.Keterangan || ''}</td>
+              <td class="py-3 px-4">${row.Lokasi || ''}</td>
             `;
             tbody.appendChild(tr);
           }
