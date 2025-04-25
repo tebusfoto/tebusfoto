@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agenda | TebusFoto</title>
   <link rel="icon" type="image/png" href="tebusfoto-favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans">
 
@@ -32,7 +33,7 @@
   <!-- Header -->
   <header class="bg-black text-white py-6 shadow-md text-center">
     <h1 class="text-3xl font-bold">Agenda Lari TebusFoto</h1>
-    <p class="text-sm text-gray-300 mt-1">Catat tanggalnya, siap tebus momen terbaikmu!</p>
+    <p class="text-sm text-gray-300 mt-1">Catat tanggalmu, siap tebus momen terbaik!</p>
   </header>
 
   <!-- Agenda Table -->
@@ -66,30 +67,27 @@
     <a href="https://instagram.com/tebusfoto_official" target="_blank" class="hover:underline">Instagram</a>
   </footer>
 
-  <!-- Script for fetching data from Google Sheets CSV -->
+  <!-- Script for fetching and parsing CSV from Google Sheets -->
   <script>
     const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/10b4v1RQvcep43UXDR5sJCK7PH7RkJkVzWkTdVCjyOP4/export?format=csv&gid=0';
 
     fetch(sheetCsvUrl)
-      .then(response => {
-        if (!response.ok) throw new Error('Gagal ambil data dari sheet!');
-        return response.text();
-      })
+      .then(response => response.text())
       .then(csv => {
-        const rows = csv.trim().split('\n').slice(1); // skip header
+        const results = Papa.parse(csv, { header: true });
         const tbody = document.getElementById('agenda-body');
 
-        rows.forEach(line => {
-          const [tanggal, lokasi, jarak, keterangan] = line.split(',');
-
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td class="py-3 px-4">${tanggal}</td>
-            <td class="py-3 px-4">${lokasi}</td>
-            <td class="py-3 px-4">${jarak}</td>
-            <td class="py-3 px-4">${keterangan}</td>
-          `;
-          tbody.appendChild(tr);
+        results.data.forEach(row => {
+          if (row.Tanggal && row["Lokasi/Event"] && row.Jarak) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td class="py-3 px-4">${row.Tanggal}</td>
+              <td class="py-3 px-4">${row["Lokasi/Event"]}</td>
+              <td class="py-3 px-4">${row.Jarak}</td>
+              <td class="py-3 px-4">${row.Keterangan || ''}</td>
+            `;
+            tbody.appendChild(tr);
+          }
         });
       })
       .catch(error => {
