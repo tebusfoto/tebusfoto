@@ -2,9 +2,9 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agenda | TebusFoto</title>
-  <link rel="icon" type="image/png" href="TebusFoto-Shutter-favicon.png">
+  <link rel="icon" type="image/png" href="tebusfoto-favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans">
@@ -13,15 +13,15 @@
   <nav class="bg-black/90 backdrop-blur fixed top-0 w-full z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center space-x-2">
-        <img src="TebusFoto-Shutter-logo.png" alt="TebusFoto Logo" class="h-10 md:h-12">
+        <img src="tebusfoto-transparent.png" alt="TebusFoto Logo" class="h-10 md:h-12" />
       </div>
       <div class="space-x-4 text-sm md:text-base">
-        <a href="index.html" class="text-white font-medium hover:text-yellow-400">Beranda</a>
+        <a href="index.html" class="text-white hover:text-yellow-400">Beranda</a>
         <a href="agenda.html" class="text-white font-semibold hover:text-yellow-400">Agenda</a>
-        <a href="#" class="text-white font-medium hover:text-yellow-400">Berita</a>
-        <a href="#" class="text-white font-medium hover:text-yellow-400">Jual Foto</a>
-        <a href="#" class="text-white font-medium hover:text-yellow-400">Beli Foto</a>
-        <a href="#" class="text-white font-medium hover:text-yellow-400">Tentang Kami</a>
+        <a href="#" class="text-white hover:text-yellow-400">Berita</a>
+        <a href="#" class="text-white hover:text-yellow-400">Jual Foto</a>
+        <a href="#" class="text-white hover:text-yellow-400">Beli Foto</a>
+        <a href="#" class="text-white hover:text-yellow-400">Tentang Kami</a>
       </div>
     </div>
   </nav>
@@ -47,33 +47,15 @@
             <th class="py-3 px-4 text-left">Keterangan</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-200">
-          <tr>
-            <td class="py-3 px-4">25 April</td>
-            <td class="py-3 px-4">Stadion Mandala Krida Yogyakarta</td>
-            <td class="py-3 px-4">3K 5K</td>
-            <td class="py-3 px-4">Syawal Night Run 2025 X</td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4">25-27 April</td>
-            <td class="py-3 px-4">Kawasan Sumut Sport Centre</td>
-            <td class="py-3 px-4">5K 10K</td>
-            <td class="py-3 px-4">Sumut Run Festival 2025</td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4">26 April</td>
-            <td class="py-3 px-4">Krisna Oleh-Oleh Singaraja, Bali</td>
-            <td class="py-3 px-4">5K</td>
-            <td class="py-3 px-4">Eco Run System</td>
-          </tr>
+        <tbody id="agenda-body" class="divide-y divide-gray-200">
+          <!-- Data akan di-load otomatis di sini -->
         </tbody>
       </table>
     </div>
 
-    <!-- Button Daftarkan Event -->
+    <!-- Daftarkan Event Button -->
     <div class="text-center mt-8">
-      <a href="form-daftar-event.html"
-         class="inline-block bg-black text-white px-6 py-2 rounded-full hover:bg-gray-900 transition">
+      <a href="form-daftar-event.html" class="inline-block bg-black text-white px-6 py-2 rounded-full hover:bg-gray-900 transition">
         + Daftarkan Event Anda
       </a>
     </div>
@@ -81,10 +63,42 @@
 
   <!-- Footer -->
   <footer class="bg-black/70 text-gray-300 text-center text-sm py-6">
-    <a href="https://instagram.com/tebusfoto_official" target="_blank" class="hover:underline">
-      Instagram
-    </a>
+    <a href="https://instagram.com/tebusfoto_official" target="_blank" class="hover:underline">Instagram</a>
   </footer>
+
+  <!-- Script for fetching data from Google Sheets CSV -->
+  <script>
+    const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/10b4v1RQvcep43UXDR5sJCK7PH7RkJkVzWkTdVCjyOP4/export?format=csv&gid=0';
+
+    fetch(sheetCsvUrl)
+      .then(response => {
+        if (!response.ok) throw new Error('Gagal ambil data dari sheet!');
+        return response.text();
+      })
+      .then(csv => {
+        const rows = csv.trim().split('\n').slice(1); // skip header
+        const tbody = document.getElementById('agenda-body');
+
+        rows.forEach(line => {
+          const [tanggal, lokasi, jarak, keterangan] = line.split(',');
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="py-3 px-4">${tanggal}</td>
+            <td class="py-3 px-4">${lokasi}</td>
+            <td class="py-3 px-4">${jarak}</td>
+            <td class="py-3 px-4">${keterangan}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(error => {
+        console.error('Error saat fetch data:', error);
+        document.getElementById('agenda-body').innerHTML = `
+          <tr><td colspan="4" class="py-4 px-4 text-red-600 text-center">Gagal memuat data agenda. Coba refresh halaman ini.</td></tr>
+        `;
+      });
+  </script>
 
 </body>
 </html>
