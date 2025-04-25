@@ -4,29 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agenda | TebusFoto</title>
-  <link rel="icon" type="image/png" href="TebusFoto-Shutter-favicon.png" />
+  <link rel="icon" type="image/png" href="tebusfoto-favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans">
 
   <!-- Navbar -->
-  <nav class="bg-black/70 backdrop-blur fixed top-0 w-full z-50 shadow-md">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <div class="flex items-center space-x-2">
-      <img src="TebusFoto-Shutter-logo.png" alt="TebusFoto Logo" class="h-14 md:h-20">
+  <nav class="bg-black/90 backdrop-blur fixed top-0 w-full z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="tebusfoto-transparent.png" alt="TebusFoto Logo" class="h-10 md:h-12" />
+      </div>
+      <div class="space-x-4 text-sm md:text-base">
+        <a href="index.html" class="text-white hover:text-yellow-400">Beranda</a>
+        <a href="agenda.html" class="text-white font-semibold hover:text-yellow-400">Agenda</a>
+        <a href="#" class="text-white hover:text-yellow-400">Berita</a>
+        <a href="#" class="text-white hover:text-yellow-400">Jual Foto</a>
+        <a href="#" class="text-white hover:text-yellow-400">Beli Foto</a>
+        <a href="#" class="text-white hover:text-yellow-400">Tentang Kami</a>
+      </div>
     </div>
-    <div class="space-x-4 text-sm md:text-base">
-      <a href="index.html" class="text-white hover:text-yellow-400">Beranda</a>
-      <a href="agenda.html" class="text-white font-semibold hover:text-yellow-400">Agenda</a>
-      <a href="#" class="text-white hover:text-yellow-400">Berita</a>
-      <a href="#" class="text-white hover:text-yellow-400">Jual Foto</a>
-      <a href="#" class="text-white hover:text-yellow-400">Beli Foto</a>
-      <a href="#" class="text-white hover:text-yellow-400">Tentang Kami</a>
-    </div>
-  </div>
-</nav>
-
+  </nav>
 
   <!-- Spacer for fixed navbar -->
   <div class="pt-16"></div>
@@ -54,14 +53,54 @@
         </tbody>
       </table>
     </div>
-  </section>
 
-  <!-- Google Form Embed -->
-  <section class="max-w-4xl mx-auto px-4 py-10 bg-white rounded-lg shadow-md mt-6">
-    <h2 class="text-2xl font-bold mb-4 text-center">Daftarkan Event Anda</h2>
-    <div class="w-full h-[800px]">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLI4rOE-rDZa0UFxMo-tEwZidLePgU6Pet19wWAXLdjGPZKw/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <!-- Native Google Forms Skeleton -->
+    <div class="mt-10 max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold mb-4 text-center">Daftarkan Event Anda</h2>
+      <form action="https://docs.google.com/forms/d/e/1FAIpQLSfLI4rOE-rDZa0UFxMo-tEwZidLePgU6Pet19wWAXLdjGPZKw/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="space-y-4">
+        <input type="hidden" name="fvv" value="1">
+        <input type="hidden" name="draftResponse" value="[]">
+        <input type="hidden" name="pageHistory" value="0">
 
+        <div>
+          <label for="entry.2005620554" class="block text-sm font-medium text-gray-700">Tanggal Event</label>
+          <input type="date" id="entry.2005620554" name="entry.2005620554" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label for="entry.1045780071" class="block text-sm font-medium text-gray-700">Nama Event</label>
+          <input type="text" id="entry.1045780071" name="entry.1045780071" placeholder="Contoh: Fun Run 5K" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label for="entry.1065046570" class="block text-sm font-medium text-gray-700">Lokasi / Venue</label>
+          <input type="text" id="entry.1065046570" name="entry.1065046570" placeholder="Contoh: GBK Senayan" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label for="entry.1700736342" class="block text-sm font-medium text-gray-700">Jarak</label>
+          <select id="entry.1700736342" name="entry.1700736342" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md">
+            <option value="">-- Pilih Jarak --</option>
+            <option value="5K">5K</option>
+            <option value="10K">10K</option>
+            <option value="21K">21K</option>
+            <option value="42K">42K</option>
+          </select>
+        </div>
+        <div>
+          <label for="entry.WAKTU_ID" class="block text-sm font-medium text-gray-700">Waktu Mulai</label>
+          <input type="time" id="entry.WAKTU_ID" name="entry.WAKTU_ID" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div>
+          <label for="entry.1166974658" class="block text-sm font-medium text-gray-700">Keterangan</label>
+          <textarea id="entry.1166974658" name="entry.1166974658" rows="3" placeholder="Ringkasan singkat event" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+        <div>
+          <label for="entry.1081212519" class="block text-sm font-medium text-gray-700">Kontak (Email/WA)</label>
+          <input type="text" id="entry.1081212519" name="entry.1081212519" placeholder="0812xxxx atau email@domain.com" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-900 transition">Kirim Event</button>
+        </div>
+      </form>
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) window.location.href='thank-you.html';"></iframe>
     </div>
   </section>
 
@@ -73,13 +112,11 @@
   <!-- Script for fetching and parsing CSV from Google Sheets -->
   <script>
     const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/10b4v1RQvcep43UXDR5sJCK7PH7RkJkVzWkTdVCjyOP4/export?format=csv&gid=0';
-
     fetch(sheetCsvUrl)
       .then(response => response.text())
       .then(csv => {
         const results = Papa.parse(csv, { header: true });
         const tbody = document.getElementById('agenda-body');
-
         results.data.forEach(row => {
           if (row.Tanggal && row.Event && row.Jarak) {
             const tr = document.createElement('tr');
