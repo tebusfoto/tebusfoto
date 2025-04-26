@@ -39,6 +39,36 @@
       document.getElementById('konten').innerText = berita.konten;
     });
 </script>
+<script>
+  fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
+    .then(res => res.json())
+    .then(data => {
+      const headline = data[0];
+      const others = data.slice(1);
+      const headlineContainer = document.getElementById('headline');
+      const listContainer = document.getElementById('berita-list');
+
+      // Tampilkan headline
+      headlineContainer.innerHTML = `
+        <img src="${headline.thumbnail}" alt="${headline.judul}">
+        <h2><a href="berita-detail.html?id=0">${headline.judul}</a></h2>
+      `;
+
+      // Tampilkan daftar berita lainnya
+      others.forEach((berita, index) => {
+        const item = document.createElement('div');
+        item.className = 'berita-item';
+        item.innerHTML = `
+          <img src="${berita.thumbnail}" alt="${berita.judul}">
+          <h3><a href="berita-detail.html?id=${index + 1}">${berita.judul}</a></h3>
+        `;
+        listContainer.appendChild(item);
+      });
+    })
+    .catch(error => {
+      console.error('Gagal memuat data:', error);
+    });
+</script>
 
 </body>
 </html>
