@@ -4,16 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Berita TebusFoto</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     body { font-family: sans-serif; margin: 2rem; background: #f4f4f4; }
+    h1 { text-align: center; margin-bottom: 2rem; }
     .headline { margin-bottom: 2rem; }
     .headline img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; }
     .headline h2 { margin-top: 1rem; }
 
-    .berita-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-    .berita-item { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .berita-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
-    .berita-item h3 { margin-top: 0.5rem; font-size: 1rem; }
+    .berita-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .berita-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .berita-item:hover {
+      transform: translateY(-4px);
+    }
+    .berita-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .berita-item h3 {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    .berita-item a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .berita-item a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -22,53 +52,38 @@
   <div id="headline" class="headline"></div>
   <div id="berita-list" class="berita-list"></div>
 
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = parseInt(urlParams.get('id'));
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec';
 
-  fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
-    .then(res => res.json())
-    .then(data => {
-      const berita = data[id];
-      if (!berita) {
-        document.getElementById('judul').innerText = 'Berita tidak ditemukan.';
-        return;
-      }
-      document.getElementById('judul').innerText = berita.judul;
-      document.getElementById('thumbnail').src = berita.thumbnail;
-      document.getElementById('konten').innerText = berita.konten;
-    });
-</script>
-<script>
-  fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
-    .then(res => res.json())
-    .then(data => {
-      const headline = data[0];
-      const others = data.slice(1);
-      const headlineContainer = document.getElementById('headline');
-      const listContainer = document.getElementById('berita-list');
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        const headline = data[0];
+        const others = data.slice(1);
+        const headlineContainer = document.getElementById('headline');
+        const listContainer     = document.getElementById('berita-list');
 
-      // Tampilkan headline
-      headlineContainer.innerHTML = `
-        <img src="${headline.thumbnail}" alt="${headline.judul}">
-        <h2><a href="berita-detail.html?id=0">${headline.judul}</a></h2>
-      `;
-
-      // Tampilkan daftar berita lainnya
-      others.forEach((berita, index) => {
-        const item = document.createElement('div');
-        item.className = 'berita-item';
-        item.innerHTML = `
-          <img src="${berita.thumbnail}" alt="${berita.judul}">
-          <h3><a href="berita-detail.html?id=${index + 1}">${berita.judul}</a></h3>
+        // Render headline
+        headlineContainer.innerHTML = `
+          <img src="${headline.thumbnail}" alt="${headline.judul}">
+          <h2><a href="detail-berita.html?id=0">${headline.judul}</a></h2>
         `;
-        listContainer.appendChild(item);
-      });
-    })
-    .catch(error => {
-      console.error('Gagal memuat data:', error);
-    });
-</script>
 
+        // Render daftar berita lainnya
+        others.forEach((item, i) => {
+          const idx = i + 1;
+          const card = document.createElement('div');
+          card.className = 'berita-item';
+          card.innerHTML = `
+            <a href="detail-berita.html?id=${idx}">
+              <img src="${item.thumbnail}" alt="${item.judul}">
+              <h3>${item.judul}</h3>
+            </a>
+          `;
+          listContainer.appendChild(card);
+        });
+      })
+      .catch(err => console.error('Gagal memuat daftar berita:', err));
+  </script>
 </body>
 </html>
