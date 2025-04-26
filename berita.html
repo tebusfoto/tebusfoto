@@ -22,32 +22,23 @@
   <div id="headline" class="headline"></div>
   <div id="berita-list" class="berita-list"></div>
 
-  <script>
-    fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
-      .then(res => res.json())
-      .then(data => {
-        const headlineContainer = document.getElementById('headline');
-        const listContainer = document.getElementById('berita-list');
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = parseInt(urlParams.get('id'));
 
-        // Pisahkan berita pertama sebagai headline
-        const [headline, ...others] = data;
+  fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
+    .then(res => res.json())
+    .then(data => {
+      const berita = data[id];
+      if (!berita) {
+        document.getElementById('judul').innerText = 'Berita tidak ditemukan.';
+        return;
+      }
+      document.getElementById('judul').innerText = berita.judul;
+      document.getElementById('thumbnail').src = berita.thumbnail;
+      document.getElementById('konten').innerText = berita.konten;
+    });
+</script>
 
-        // Tampilkan headline
-        headlineContainer.innerHTML = `
-          <img src=\"${headline.thumbnail}\" alt=\"${headline.judul}\">
-          <h2><a href=\"${headline.link}\" target=\"_blank\">${headline.judul}</a></h2>
-        `;
-
-        others.forEach((berita, index) => {
-  const item = document.createElement('div');
-  item.className = 'berita-item';
-  item.innerHTML = `
-    <img src="${berita.thumbnail}" alt="${berita.judul}">
-    <h3><a href="berita-detail.html?id=${index + 1}">${berita.judul}</a></h3>
-  `;
-  listContainer.appendChild(item);
-});
-      });
-  </script>
 </body>
 </html>
