@@ -1,40 +1,23 @@
 document.getElementById('form-berita').addEventListener('submit', function(event) {
-  event.preventDefault(); // cegah reload halaman
+  event.preventDefault();
 
-  // ambil data dari form
-  const judul = document.getElementById('judul').value.trim();
-  const ringkasan = document.getElementById('ringkasan').value.trim();
-  const thumbnail = document.getElementById('thumbnail').value.trim();
-  const konten = document.getElementById('konten').value.trim();
+  const judul = document.getElementById('judul').value;
+  const ringkasan = document.getElementById('ringkasan').value;
+  const thumbnail = document.getElementById('thumbnail').value;
+  const konten = document.getElementById('konten').value;
 
-  // validasi sederhana
-  if (!judul || !ringkasan || !konten) {
-    alert('Harap isi semua kolom yang wajib.');
-    return;
-  }
-
-  // kirim ke Google Apps Script
-  fetch('https://script.google.com/macros/s/AKfycbyJtrIMmY0lzm5eOInxbOgGyg2IVTeWSIVzmg_6v4o_qPIqMJD0OB4W_tleJTZ05I_M/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbzgUxDj7pL8EzCWrKULPmiLDWCvZmsVQ3jr7l2KSBirBKjYWZDO9u8SdvJtJOC466SA/exec', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      judul: judul,
-      ringkasan: ringkasan,
-      thumbnail: thumbnail,
-      konten: konten
-    })
+    mode: 'no-cors',
+    body: JSON.stringify({ judul, ringkasan, thumbnail, konten }),
+    headers: { 'Content-Type': 'application/json' }
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === 'success') {
-      alert('✅ Berita berhasil dikirim!');
-      document.getElementById('form-berita').reset();
-    } else {
-      throw new Error(data.message || 'Gagal menyimpan.');
-    }
+  .then(() => {
+    alert('✅ Berita berhasil dikirim!');
+    document.getElementById('form-berita').reset();
   })
   .catch(error => {
-    console.error('❌ Error:', error);
-    alert('❌ Terjadi kesalahan. Silakan coba lagi.');
+    alert('❌ Gagal mengirim berita. Coba lagi.');
+    console.error('Error:', error);
   });
 });
