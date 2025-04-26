@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="container">
-    <img id="thumbnail" src="" alt="">
+    <img id="thumbnail" src="" alt="Gambar Berita">
     <h1 id="judul">Memuat...</h1>
     <div id="konten" class="content"></div>
   </div>
@@ -30,14 +30,28 @@
         const berita = data[id];
 
         if (!berita) {
-          document.getElementById('konten').innerHTML = berita.konten;
+          document.getElementById('judul').innerText = 'Berita tidak ditemukan.';
           return;
         }
 
+        // Set judul
         document.getElementById('judul').innerText = berita.judul;
-        document.getElementById('thumbnail').src = berita.thumbnail;
-        document.getElementById('thumbnail').alt = berita.judul;
-        document.getElementById('konten').innerText = berita.konten;
+
+        // Set thumbnail kalau ada
+        if (berita.thumbnail && berita.thumbnail.trim() !== '') {
+          document.getElementById('thumbnail').src = berita.thumbnail;
+          document.getElementById('thumbnail').alt = berita.judul;
+          document.getElementById('thumbnail').style.display = 'block';
+        } else {
+          document.getElementById('thumbnail').style.display = 'none';
+        }
+
+        // Set konten berita
+        document.getElementById('konten').innerHTML = berita.konten;
+      })
+      .catch(error => {
+        console.error('Gagal mengambil data:', error);
+        document.getElementById('judul').innerText = 'Terjadi kesalahan saat memuat berita.';
       });
   </script>
 </body>
