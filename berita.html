@@ -38,16 +38,15 @@
           <h2><a href=\"${headline.link}\" target=\"_blank\">${headline.judul}</a></h2>
         `;
 
-        // Tampilkan berita lain
-        others.forEach(berita => {
-          const item = document.createElement('div');
-          item.className = 'berita-item';
-          item.innerHTML = `
-            <img src=\"${berita.thumbnail}\" alt=\"${berita.judul}\">
-            <h3><a href=\"${berita.link}\" target=\"_blank\">${berita.judul}</a></h3>
-          `;
-          listContainer.appendChild(item);
-        });
+        others.forEach((berita, index) => {
+  const item = document.createElement('div');
+  item.className = 'berita-item';
+  item.innerHTML = `
+    <img src="${berita.thumbnail}" alt="${berita.judul}">
+    <h3><a href="berita-detail.html?id=${index + 1}">${berita.judul}</a></h3>
+  `;
+  listContainer.appendChild(item);
+});
       });
   </script>
 </body>
