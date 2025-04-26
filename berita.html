@@ -3,10 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Berita</title>
+  <title>Berita TebusFoto</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; background: #f4f4f4; }
+    .headline { margin-bottom: 2rem; }
+    .headline img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; }
+    .headline h2 { margin-top: 1rem; }
+
+    .berita-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+    .berita-item { background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .berita-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+    .berita-item h3 { margin-top: 0.5rem; font-size: 1rem; }
+  </style>
 </head>
 <body>
-  <h1>Halaman Berita</h1>
-  <p>Daftar berita akan ditampilkan di sini.</p>
+  <h1>Berita TebusFoto</h1>
+
+  <div id="headline" class="headline"></div>
+  <div id="berita-list" class="berita-list"></div>
+
+  <script>
+    fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
+      .then(res => res.json())
+      .then(data => {
+        const headlineContainer = document.getElementById('headline');
+        const listContainer = document.getElementById('berita-list');
+
+        // Pisahkan berita pertama sebagai headline
+        const [headline, ...others] = data;
+
+        // Tampilkan headline
+        headlineContainer.innerHTML = `
+          <img src=\"${headline.thumbnail}\" alt=\"${headline.judul}\">
+          <h2><a href=\"${headline.link}\" target=\"_blank\">${headline.judul}</a></h2>
+        `;
+
+        // Tampilkan berita lain
+        others.forEach(berita => {
+          const item = document.createElement('div');
+          item.className = 'berita-item';
+          item.innerHTML = `
+            <img src=\"${berita.thumbnail}\" alt=\"${berita.judul}\">
+            <h3><a href=\"${berita.link}\" target=\"_blank\">${berita.judul}</a></h3>
+          `;
+          listContainer.appendChild(item);
+        });
+      });
+  </script>
 </body>
 </html>
