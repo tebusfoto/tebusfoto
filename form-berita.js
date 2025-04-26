@@ -1,32 +1,32 @@
-document.getElementById('form-berita').addEventListener('submit', function(event) {
-  event.preventDefault(); // Mencegah form submit default
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Berita TebusFoto</title>
+</head>
+<body>
+  <h1>Tambah Berita</h1>
+  <form action="https://script.google.com/macros/s/AKfycb…/exec" method="post" target="hidden_iframe" onsubmit="alert('Berita terkirim!');">
+    <label>Tanggal:</label><br>
+    <input type="date" name="tanggal"/><br><br>
 
-  // Ambil nilai dari input form
-  const judul = document.getElementById('judul').value;
-  const ringkasan = document.getElementById('ringkasan').value;
-  const thumbnail = document.getElementById('thumbnail').value;
-  const konten = document.getElementById('konten').value;
+    <label>Judul:</label><br>
+    <input type="text" name="judul" required/><br><br>
 
-  // Kirim data ke Google Sheets melalui Apps Script
-  fetch('https://script.google.com/macros/s/AKfycbwckWL1H9P5xmj4RtMe_DThLqM_nAbp0OrJuVATPzed36EtyRCIQ6_rjrKUlPCGh4VQ/exec', {
-    method: 'POST',
-    body: JSON.stringify({
-      judul: judul,
-      ringkasan: ringkasan,
-      thumbnail: thumbnail,
-      konten: konten
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    alert('Berita berhasil dikirim!');
-    document.getElementById('form-berita').reset(); // Reset form
-  })
-  .catch(error => {
-    alert('Terjadi kesalahan saat mengirim berita. Silakan coba lagi.');
-    console.error('Error:', error);
-  });
-});
+    <label>Ringkasan:</label><br>
+    <textarea name="ringkasan"></textarea><br><br>
+
+    <label>Link Thumbnail:</label><br>
+    <input type="url" name="thumbnail" required/><br><br>
+
+    <label>Konten Lengkap:</label><br>
+    <textarea name="konten" required></textarea><br><br>
+
+    <button type="submit">Kirim Berita</button>
+  </form>
+
+  <!-- Iframe tersembunyi agar form tidak redirect halaman utama -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+</body>
+</html>
