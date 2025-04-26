@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Berita - TebusFoto</title>
- <!-- <link rel="stylesheet" href="styles.css"> -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Berita</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>Form Berita</h1>
   <form id="form-berita">
-    <div>
-      <label for="judul">Judul Berita</label>
-      <input type="text" id="judul" required>
-    </div>
-    <div>
-      <label for="ringkasan">Ringkasan Berita</label>
-      <textarea id="ringkasan"></textarea>
-    </div>
-    <div>
-      <label for="thumbnail">Link Thumbnail</label>
-      <input type="text" id="thumbnail" placeholder="URL gambar" required>
-    </div>
-    <div>
-      <label for="konten">Konten Berita</label>
-      <textarea id="konten" required></textarea>
-    </div>
+    <label for="judul">Judul Berita</label><br>
+    <input type="text" id="judul" name="judul" required><br><br>
+
+    <label for="ringkasan">Ringkasan</label><br>
+    <textarea id="ringkasan" name="ringkasan" rows="3" required></textarea><br><br>
+
+    <label for="thumbnail">Link Gambar Thumbnail</label><br>
+    <input type="url" id="thumbnail" name="thumbnail"><br><br>
+
+    <label for="konten">Isi Konten</label><br>
+    <textarea id="konten" name="konten" rows="5" required></textarea><br><br>
+
     <button type="submit">Kirim Berita</button>
   </form>
 
-  <script src="form-berita.js"></script> <!-- JS untuk proses form -->
+  <script src="form-berita.js"></script>
 </body>
 </html>
