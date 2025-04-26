@@ -8,7 +8,7 @@ document.getElementById('form-berita').addEventListener('submit', function(event
   const konten = document.getElementById('konten').value;
 
   // Kirim data ke Google Sheets melalui Apps Script
-  fetch('https://script.google.com/macros/s/AKfycbwXC3aOTWtoacomjS_P9dLio3-Uxk3O2a4-_BGPjT8GlBLhez_evbj_UIjKsVQK15Hc/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbzBpNkX1R45DzXsqPa9npU-wE2ilfeReVOHt4bI__Bz9-It71lTAcMqtCgNb1Tozvs/exec', {
     method: 'POST',
     body: JSON.stringify({
       judul: judul,
