@@ -1,32 +1,40 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Form Berita TebusFoto</title>
-</head>
-<body>
-  <h1>Tambah Berita</h1>
-  <form action="https://script.google.com/macros/s/AKfycb…/exec" method="post" target="hidden_iframe" onsubmit="alert('Berita terkirim!');">
-    <label>Tanggal:</label><br>
-    <input type="date" name="tanggal"/><br><br>
+document.getElementById('form-berita').addEventListener('submit', function(event) {
+  event.preventDefault(); // cegah reload halaman
 
-    <label>Judul:</label><br>
-    <input type="text" name="judul" required/><br><br>
+  // ambil data dari form
+  const judul = document.getElementById('judul').value.trim();
+  const ringkasan = document.getElementById('ringkasan').value.trim();
+  const thumbnail = document.getElementById('thumbnail').value.trim();
+  const konten = document.getElementById('konten').value.trim();
 
-    <label>Ringkasan:</label><br>
-    <textarea name="ringkasan"></textarea><br><br>
+  // validasi sederhana
+  if (!judul || !ringkasan || !konten) {
+    alert('Harap isi semua kolom yang wajib.');
+    return;
+  }
 
-    <label>Link Thumbnail:</label><br>
-    <input type="url" name="thumbnail" required/><br><br>
-
-    <label>Konten Lengkap:</label><br>
-    <textarea name="konten" required></textarea><br><br>
-
-    <button type="submit">Kirim Berita</button>
-  </form>
-
-  <!-- Iframe tersembunyi agar form tidak redirect halaman utama -->
-  <iframe name="hidden_iframe" style="display:none;"></iframe>
-</body>
-</html>
+  // kirim ke Google Apps Script
+  fetch('https://script.google.com/macros/s/AKfycbyJtrIMmY0lzm5eOInxbOgGyg2IVTeWSIVzmg_6v4o_qPIqMJD0OB4W_tleJTZ05I_M/exec', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      judul: judul,
+      ringkasan: ringkasan,
+      thumbnail: thumbnail,
+      konten: konten
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === 'success') {
+      alert('✅ Berita berhasil dikirim!');
+      document.getElementById('form-berita').reset();
+    } else {
+      throw new Error(data.message || 'Gagal menyimpan.');
+    }
+  })
+  .catch(error => {
+    console.error('❌ Error:', error);
+    alert('❌ Terjadi kesalahan. Silakan coba lagi.');
+  });
+});
