@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Berita</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    img { width: 100%; border-radius: 10px; margin-bottom: 1rem; }
+    h1 { margin-bottom: 1rem; }
+    .content { margin-top: 1rem; line-height: 1.6; white-space: pre-line; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="thumbnail" src="" alt="">
+    <h1 id="judul">Memuat...</h1>
+    <div id="konten" class="content"></div>
+  </div>
+
+  <script>
+    // Ambil ID dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = parseInt(urlParams.get('id'));
+
+    fetch('https://script.google.com/macros/s/AKfycbxV0vo1LKRBXbNaYk6JdHgDYE9OkVONwWOgtIOYfF1_UUmoLYT-0xp2AdLck-chQzUp/exec')
+      .then(res => res.json())
+      .then(data => {
+        const berita = data[id];
+
+        if (!berita) {
+          document.getElementById('judul').innerText = 'Berita tidak ditemukan.';
+          return;
+        }
+
+        document.getElementById('judul').innerText = berita.judul;
+        document.getElementById('thumbnail').src = berita.thumbnail;
+        document.getElementById('thumbnail').alt = berita.judul;
+        document.getElementById('konten').innerText = berita.konten;
+      });
+  </script>
+</body>
+</html>
